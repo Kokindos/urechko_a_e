@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(labs_3sem)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(sirotkin_s_u/queue_p doctest)
+add_subdirectory(sirotkin_s_u/queue_p)
