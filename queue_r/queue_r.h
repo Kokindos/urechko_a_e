@@ -36,6 +36,7 @@ private:
     Node *head = nullptr;
     static const char left_bracket_ = '{', right_bracket_ = '}';
 };
-std::ostream& operator<<(std::ostream &ostrm, const QueueR &data);
+
+std::ostream &operator<<(std::ostream &ostrm, const QueueR &data);
 
 #endif //URECHKO_A_E_QUEUE_R_H
