@@ -4,6 +4,7 @@
 
 #include "queue_r.h"
 #include <iostream>
+#include <stdexcept>
 
 QueueR::QueueR(const QueueR &copy) {
     head = new Node(copy.head->value);
@@ -12,12 +13,14 @@ QueueR::QueueR(const QueueR &copy) {
     while (currentCopy != nullptr) {
         current->next = new Node(currentCopy->value);
         currentCopy = currentCopy->next;
+        current = current->next;
+
     }
 }
 
 QueueR &QueueR::operator=(const QueueR &rhs) {
     QueueR copy(rhs);
-    head = copy.head;
+    std::swap(head, copy.head);
     return *this;
 }
 
