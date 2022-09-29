@@ -24,6 +24,10 @@ TEST_SUITE("Priority queue QueueP testing") {
         CHECK(queue.empty());
         queue.push(0);
         CHECK_FALSE(queue.empty());
+        queue.push(1);
+        queue.pop();
+        queue.pop();
+        CHECK(queue.empty());
     }
 
     TEST_CASE("Pop") {
@@ -77,10 +81,10 @@ TEST_SUITE("Priority queue QueueP testing") {
         CHECK(q1.front() == 1);
         CHECK(q2.front() == 2);
         q2 = q1;
-//        CHECK(q2.front() == 1);
-//        q2.pop();
-//        CHECK(q1.front() == 1);
-//        CHECK(q2.front() == 2);
+        CHECK(q2.front() == 1);
+        q2.pop();
+        CHECK(q1.front() == 1);
+        CHECK(q2.front() == 2);
     }
 
 }
