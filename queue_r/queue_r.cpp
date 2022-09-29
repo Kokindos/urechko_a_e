@@ -3,7 +3,7 @@
 //
 
 #include "queue_r.h"
-
+#include <iostream>
 QueueR::QueueR(const QueueR &copy) {
     head = new Node(copy.head->value);
     Node *currentCopy = copy.head->next;
@@ -15,10 +15,14 @@ QueueR::QueueR(const QueueR &copy) {
 }
 
 QueueR &QueueR::operator=(const QueueR &rhs) {
+    QueueR copy(rhs);
+    head = copy.head;
+    return *this;
+}
 
-};
+QueueR::~QueueR() {
 
-QueueR::~QueueR() {}; //деструктор указателя уничтожает сам указатель, а объект на которым ссылается указатель не уничтожается
+} //деструктор указателя уничтожает сам указатель, а объект на которым ссылается указатель не уничтожается
 void QueueR::push(int value) {
     if (head == nullptr) {
         head = new Node(value);
@@ -31,7 +35,7 @@ void QueueR::push(int value) {
         Node *current = head;
         while (current->next != nullptr && current->next->value <= value) {
             current = current->next;
-        } // двигаем current в цикле а присваивание после цикла
+        } // двигаем current в цикле, а присваивание после цикла
         Node *inserted = new Node(value);
         inserted->next = current->next;
         current->next = inserted;
@@ -45,8 +49,20 @@ void QueueR::pop() {
 
 bool QueueR::empty() const {
     return head == nullptr;
-};
-
+}
+std::ostream &QueueR::writeTo(std::ostream &ostrm) const {
+    ostrm << left_bracket_ << " ";
+    Node* current = head;
+    while (current != nullptr) {
+        ostrm << current->value << " ";
+        current=current->next;
+    }
+    ostrm << right_bracket_ << std::endl;
+    return ostrm;
+}
 int QueueR::front() const {
     return head->value;
-};
+}
+std::ostream& operator<<(std::ostream &ostrm, const QueueR &data){
+    return data.writeTo(ostrm);
+}
