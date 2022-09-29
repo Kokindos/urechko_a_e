@@ -22,7 +22,12 @@ QueueR &QueueR::operator=(const QueueR &rhs) {
 }
 
 QueueR::~QueueR() {
-
+    Node *current = head;
+    while (current != nullptr) {
+        Node *deleted = current;
+        current = current->next;
+        delete deleted;
+    }
 } //деструктор указателя уничтожает сам указатель, а объект на которым ссылается указатель не уничтожается
 void QueueR::push(int value) {
     if (empty()) {
@@ -71,6 +76,8 @@ std::ostream &QueueR::writeTo(std::ostream &ostrm) const {
 }
 
 int QueueR::front() const {
+    if (empty())
+        throw std::out_of_range("empty queue");
     return head->value;
 }
 
